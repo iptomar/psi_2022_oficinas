@@ -9,6 +9,7 @@ namespace psi_2022_oficinas.Models
 {
     public class Clientes
     {
+        [Key]
         public int IdClientes { get; set; }
 
         [Required]
@@ -57,6 +58,8 @@ namespace psi_2022_oficinas.Models
         [DisplayFormat(DataFormatString = "{0-9}", ApplyFormatInEditMode = true)]
         public string Ntelemovel { get; set; }
 
+
+        public ICollection<Marcacoes> ListaMarcacoes { get; set; }
 
     }
 }
