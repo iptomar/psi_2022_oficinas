@@ -24,7 +24,7 @@
 
         public String ClassServico { get; set; }
 
-        public string EstadoServico { get; set; }
+        public String EstadoServico { get; set; }
 
         public String Descricao { get; set; }
 
