@@ -11,6 +11,7 @@
         [ForeignKey(nameof(Pagamento)] 
         public int IdPagamento { get; set; }
 
+
         [ForeignKey(nameof(Clientes)]
         public int IdCliente { get; set; }
 
