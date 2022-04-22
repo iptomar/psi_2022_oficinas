@@ -6,7 +6,7 @@ namespace psi_2022_oficinas.Models
     {   
         public Oficinas()
         {
-            ListaMarcacoes = new HashSet<Marcacoes>();
+            //ListaMarcacoes = new HashSet<Marcacoes>();
         }
 
         [Key]
