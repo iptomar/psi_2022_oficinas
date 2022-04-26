@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using psi_2022_oficinas.Models;
 
 namespace psi_2022_oficinas.Data
 {
@@ -12,7 +13,7 @@ namespace psi_2022_oficinas.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(model);
+            base.OnModelCreating(modelBuilder);
 
             // insert DB seed
 
@@ -25,5 +26,10 @@ namespace psi_2022_oficinas.Data
 
         // Representar as Tabelas da BD
         public DbSet<Clientes> Clientes { get; set; }
+        public DbSet<Oficinas> Oficinas { get; set; }
+        public DbSet<Marcacoes> Marcacoes { get; set; }
+        public DbSet<Gestores> Gestores { get; set; }
+        public DbSet<MetodoPagamento> MetodoPagamento { get; set; }
+
     }
 }

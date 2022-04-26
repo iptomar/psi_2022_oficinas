@@ -9,57 +9,95 @@ namespace psi_2022_oficinas.Models
 {
     public class Clientes
     {
+
+        public Clientes()
+        {
+            ListaMarc = new HashSet<Marcacoes>();
+        }
+
+        /// <summary>
+        /// Identificador do Cliente
+        /// </summary>
         [Key]
         public int IdClientes { get; set; }
 
+        /// <summary>
+        /// Nome Próprio do Cliente
+        /// </summary>
         [Required]
         [StringLength(50, ErrorMessage = "O primeiro nome não pode conter mais que 50 letras.\n Se for necessário abrevie o seu nome.")]
         [Column("PrimeiroNome")]
         [Display(Name = "Primeiro Nome")]
         public string PrimeiroNome { get; set; }
         
+        /// <summary>
+        /// Apelido do Cliente
+        /// </summary>
         [Required]
         [StringLength(50, ErrorMessage = "O primeiro nome não pode conter mais que 50 letras.\n Se for necessário abrevie o seu nome.")]
         [Column("Apelido")]
         [Display(Name = "Apelido")]
         public string Apelido { get; set; }
 
+        /// <summary>
+        /// Nome do Cliente
+        /// </summary>
         public String NomeCliente
         {
             get { return PrimeiroNome +" "+ Apelido; }
         }
 
+        /// <summary>
+        /// Data de Nascimento do Cliente
+        /// </summary>
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data de Nascimento")]
         public DateTime DataNasc { get; set; }
 
+        /// <summary>
+        /// Email do Cliente
+        /// </summary>
         [Required]
         [DataType(DataType.EmailAddress)]
         public Object Email { get; set; }
 
+        /// <summary>
+        /// NIF do Cliente
+        /// </summary>
         [Required]
         [StringLength(9)]
         [DisplayFormat(DataFormatString = "{0-9}", ApplyFormatInEditMode= true)]
         public string NIF { get; set; }
 
+        /// <summary>
+        /// Número da Carta de Condução do Cliente
+        /// </summary>
         [Required]
         [StringLength(9)]
         [DisplayFormat(DataFormatString = "{0-9}", ApplyFormatInEditMode = true)]
         public string NCartaConducao { get; set; }
 
+        /// <summary>
+        /// Morada do Cliente
+        /// </summary>
         [Required]
         [StringLength(50)]
         public string Morada { get; set; }
 
+        /// <summary>
+        /// Número de Telemóvel do Cliente
+        /// </summary>
         [Required]
         [StringLength(9)]
         [DisplayFormat(DataFormatString = "{0-9}", ApplyFormatInEditMode = true)]
         public string Ntelemovel { get; set; }
 
-
-        public ICollection<Marcacoes> ListaMarcacoes { get; set; }
+        /// <summary>
+        /// Coleção de Marcações do Cliente
+        /// </summary>
+        public ICollection<Marcacoes> ListaMarc { get; set; }
 
     }
 }
