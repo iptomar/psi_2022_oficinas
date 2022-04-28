@@ -61,7 +61,7 @@ namespace psi_2022_oficinas.Models
         /// </summary>
         [Required]
         [DataType(DataType.EmailAddress)]
-        public Object Email { get; set; }
+        public String Email { get; set; }
 
         /// <summary>
         /// NIF do Cliente
