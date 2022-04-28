@@ -15,13 +15,20 @@ namespace psi_2022_oficinas.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // insert DB seed
+            //insert DB seed
 
-            modelBuilder.Entity<MetodoPagamento>().HasData(
-                new MetodoPagamento { IdPagamento = 0, TipoPagamento = "" },
-                new MetodoPagamento { IdPagamento = 1, TipoPagamento = "" },
-                new MetodoPagamento { IdPagamento = 2, TipoPagamento = "" }
-            );
+            //modelBuilder.Entity<MetodoPagamento>().HasData(
+            //    new MetodoPagamento { IdPagamento = 0, TipoPagamento = "MB" },
+            //    new MetodoPagamento { IdPagamento = 1, TipoPagamento = "MB" },
+            //    new MetodoPagamento { IdPagamento = 2, TipoPagamento = "MB" }
+            //    new MetodoPagamento { IdPagamento = 2, TipoPagamento = "MB" }
+
+            //    );
+            //modelBuilder.Entity<Clientes>().HasData(
+            //    new Clientes { IdClientes = 0, PrimeiroNome = "" },
+               
+            //    );
+
         }
 
         // Representar as Tabelas da BD

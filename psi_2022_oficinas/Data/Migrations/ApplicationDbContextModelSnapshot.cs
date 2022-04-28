@@ -224,6 +224,183 @@ namespace psi_2022_oficinas.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("psi_2022_oficinas.Models.Clientes", b =>
+                {
+                    b.Property<int>("IdClientes")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdClientes"), 1L, 1);
+
+                    b.Property<string>("Apelido")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Apelido");
+
+                    b.Property<DateTime>("DataNasc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Morada")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("NCartaConducao")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.Property<string>("NIF")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.Property<string>("Ntelemovel")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.Property<string>("PrimeiroNome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PrimeiroNome");
+
+                    b.HasKey("IdClientes");
+
+                    b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("psi_2022_oficinas.Models.Gestores", b =>
+                {
+                    b.Property<int>("GestorID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GestorID"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("PrimeiroNome");
+
+                    b.HasKey("GestorID");
+
+                    b.ToTable("Gestores");
+                });
+
+            modelBuilder.Entity("psi_2022_oficinas.Models.Marcacoes", b =>
+                {
+                    b.Property<int>("IdMarcacao")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMarcacao"), 1L, 1);
+
+                    b.Property<string>("Caucao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClassServico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DataPedido")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EstadoServico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdOficina")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPagamento")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdMarcacao");
+
+                    b.HasIndex("IdCliente");
+
+                    b.HasIndex("IdOficina");
+
+                    b.HasIndex("IdPagamento");
+
+                    b.ToTable("Marcacoes");
+                });
+
+            modelBuilder.Entity("psi_2022_oficinas.Models.MetodoPagamento", b =>
+                {
+                    b.Property<int>("IdPagamento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPagamento"), 1L, 1);
+
+                    b.Property<string>("TipoPagamento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdPagamento");
+
+                    b.ToTable("MetodoPagamento");
+                });
+
+            modelBuilder.Entity("psi_2022_oficinas.Models.Oficinas", b =>
+                {
+                    b.Property<int>("IdOficina")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdOficina"), 1L, 1);
+
+                    b.Property<string>("CodigoPostal")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("IdGestor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Morada")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("NumTelemovel")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
+
+                    b.HasKey("IdOficina");
+
+                    b.HasIndex("IdGestor");
+
+                    b.ToTable("Oficinas");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -273,6 +450,54 @@ namespace psi_2022_oficinas.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("psi_2022_oficinas.Models.Marcacoes", b =>
+                {
+                    b.HasOne("psi_2022_oficinas.Models.Clientes", "Cliente")
+                        .WithMany("ListaMarc")
+                        .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("psi_2022_oficinas.Models.Oficinas", "Oficina")
+                        .WithMany("ListaMarcacoes")
+                        .HasForeignKey("IdOficina")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("psi_2022_oficinas.Models.MetodoPagamento", "Pagamento")
+                        .WithMany()
+                        .HasForeignKey("IdPagamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Oficina");
+
+                    b.Navigation("Pagamento");
+                });
+
+            modelBuilder.Entity("psi_2022_oficinas.Models.Oficinas", b =>
+                {
+                    b.HasOne("psi_2022_oficinas.Models.Gestores", "Gestor")
+                        .WithMany()
+                        .HasForeignKey("IdGestor")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gestor");
+                });
+
+            modelBuilder.Entity("psi_2022_oficinas.Models.Clientes", b =>
+                {
+                    b.Navigation("ListaMarc");
+                });
+
+            modelBuilder.Entity("psi_2022_oficinas.Models.Oficinas", b =>
+                {
+                    b.Navigation("ListaMarcacoes");
                 });
 #pragma warning restore 612, 618
         }
