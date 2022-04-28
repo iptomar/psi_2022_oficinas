@@ -13,6 +13,7 @@ namespace psi_2022_oficinas.Models
         /// Identificador do Pagamento
         /// </summary>
         [Key]
+        [Required]
         public int IdPagamento { get; set; }
 
         /// <summary>
