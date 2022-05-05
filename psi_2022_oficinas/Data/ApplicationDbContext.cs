@@ -24,10 +24,13 @@ namespace psi_2022_oficinas.Data
             //    new MetodoPagamento { IdPagamento = 2, TipoPagamento = "MB" }
 
             //    );
-            //modelBuilder.Entity<Clientes>().HasData(
-            //    new Clientes { IdClientes = 0, PrimeiroNome = "" },
-               
-            //    );
+
+            // seed para a tabela gestores
+            modelBuilder.Entity<Gestores>().HasData(
+                new Gestores { GestorID = 1, Nome = "Gestor1", Email = "gestor1@mail.com" },
+                new Gestores { GestorID = 2, Nome = "Gestor2", Email = "gestor2@mail.com" },
+                new Gestores { GestorID = 3, Nome = "Gestor3", Email = "gestor3@mail.com" }
+                ) ;
 
         }
 
