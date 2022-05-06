@@ -5,7 +5,31 @@ using psi_2022_oficinas.Models;
 
 namespace psi_2022_oficinas.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    /// <summary>
+    /// classe para recolher os dados particulares dos Utilizadores
+    /// vamos deixar de usar o 'IdentityUser' e começar a usar este
+    /// A adição desta classe implica:
+    ///    - mudar a classe de criação da Base de Dados
+    ///    - mudar no ficheiro 'startup.cs' a referência ao tipo do utilizador
+    ///    - mudar em todos os ficheiros do projeto a referência a 'IdentityUser' 
+    ///           para 'ApplicationUser'
+    /// </summary>
+    public class ApplicationUser : IdentityUser
+    {
+
+        /// <summary>
+        /// recolhe a data de registo de um utilizador
+        /// </summary>
+        public DateTime DataRegisto { get; set; }
+
+        // /// <summary>
+        // /// se fizerem isto, estão a adicionar todos os atributos do 'Cliente'
+        // /// à tabela de autenticação
+        // /// </summary>
+        // public Clientes Cliente { get; set; }
+    }
+
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -32,13 +56,12 @@ namespace psi_2022_oficinas.Data
 
                 );
 
-
             // seed para a tabela gestores
             modelBuilder.Entity<Gestores>().HasData(
                 new Gestores { GestorID = 1, Nome = "Gestor1", Email = "gestor1@mail.com" },
                 new Gestores { GestorID = 2, Nome = "Gestor2", Email = "gestor2@mail.com" },
                 new Gestores { GestorID = 3, Nome = "Gestor3", Email = "gestor3@mail.com" }
-                ) ;
+                );
 
         }
 
