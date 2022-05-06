@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using psi_2022_oficinas.Models;
 
@@ -15,15 +16,22 @@ namespace psi_2022_oficinas.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // adicionar os Roles
+            modelBuilder.Entity<IdentityRole>().HasData(
+               new IdentityRole { Id = "C", Name = "Cliente", NormalizedName = "CLIENTE" },
+               new IdentityRole { Id = "A", Name = "Admin", NormalizedName = "ADMIN" },
+               new IdentityRole { Id = "G", Name = "Gestor", NormalizedName = "GESTOR" }
+            );
+
             //insert DB seed
 
-            //modelBuilder.Entity<MetodoPagamento>().HasData(
-            //    new MetodoPagamento { IdPagamento = 0, TipoPagamento = "MB" },
-            //    new MetodoPagamento { IdPagamento = 1, TipoPagamento = "MB" },
-            //    new MetodoPagamento { IdPagamento = 2, TipoPagamento = "MB" }
-            //    new MetodoPagamento { IdPagamento = 2, TipoPagamento = "MB" }
+            modelBuilder.Entity<MetodoPagamento>().HasData(
+                new MetodoPagamento { IdPagamento = 1, TipoPagamento = "Multibanco" },
+                new MetodoPagamento { IdPagamento = 2, TipoPagamento = "MBway" },
+                new MetodoPagamento { IdPagamento = 3, TipoPagamento = "Cartão de Crédito" }
 
-            //    );
+                );
+
 
             // seed para a tabela gestores
             modelBuilder.Entity<Gestores>().HasData(
