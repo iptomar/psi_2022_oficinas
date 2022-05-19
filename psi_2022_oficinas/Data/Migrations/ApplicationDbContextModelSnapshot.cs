@@ -52,21 +52,21 @@ namespace psi_2022_oficinas.Data.Migrations
                         new
                         {
                             Id = "C",
-                            ConcurrencyStamp = "5153e2d8-2c2b-4ab6-ac95-546c955e95e4",
+                            ConcurrencyStamp = "2aaa0a73-8439-4d55-bb44-cafa17ee3671",
                             Name = "Cliente",
                             NormalizedName = "CLIENTE"
                         },
                         new
                         {
                             Id = "A",
-                            ConcurrencyStamp = "67d75079-52c3-4d41-8699-5b060ed02e5f",
+                            ConcurrencyStamp = "6dc43337-d00d-417f-904e-3464f14fa1b1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "G",
-                            ConcurrencyStamp = "f65ef2d8-14f0-4cfa-aa7f-e764ecbae341",
+                            ConcurrencyStamp = "76bef8e7-e717-4acc-82be-b9e02d133d7f",
                             Name = "Gestor",
                             NormalizedName = "GESTOR"
                         });
@@ -264,11 +264,6 @@ namespace psi_2022_oficinas.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("Apelido");
 
-                    b.Property<string>("CodPostal")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
                     b.Property<DateTime>("DataNasc")
                         .HasColumnType("datetime2");
 
@@ -301,9 +296,6 @@ namespace psi_2022_oficinas.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("PrimeiroNome");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdClientes");
 
