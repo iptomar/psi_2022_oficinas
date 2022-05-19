@@ -1,0 +1,78 @@
+﻿@model IEnumerable<psi_2022_oficinas.Models.Oficinas>
+
+@{
+    ViewData["Title"] = "Oficinas: Search";
+}
+
+<h1>Oficinas: Search</h1>
+
+<p>
+    <a asp-action="Search">Search</a>
+</p>
+
+<form asp-controller="Oficinas" asp-action="Search" method="get">
+    <p>
+        Localidade: <input type="text" name="Local" />
+        <input type="submit" value="search" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Morada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Localidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodigoPostal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumTelemovel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gestor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Imagem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Morada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Localidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodigoPostal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumTelemovel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gestor.Email)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.IdOficina">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

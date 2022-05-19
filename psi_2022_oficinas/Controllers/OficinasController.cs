@@ -26,6 +26,45 @@ namespace psi_2022_oficinas.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // procurar oficinas por localidade
+        //public async Task<IActionResult> Index(string local)
+        //{
+        //    // define a query LINQ para selecionar as oficinas
+        //    var oficinas = from m in _context.Oficinas select m;
+
+        //    // se local contem uma string
+        //    if (!String.IsNullOrEmpty(local))
+        //    {
+        //        // modificar a query para filtrar as oficinas onde Localidade contem a string local
+        //        oficinas = oficinas.Where(s => s.Localidade!.Contains(local));
+        //    }
+
+        //    // query é executada aqui quando este metodo é invocado.
+        //    // Retorna à view (Index) um objeto do modelo do tipo Oficinas
+        //    // que contem uma lista de oficinas onde foi encontrado a string local no atributo Localidade
+        //    return View(await oficinas.ToListAsync());
+        //}
+
+        // procurar oficinas por localidade
+        public async Task<IActionResult> Search(string local)
+        {
+            // define a query LINQ para selecionar as oficinas
+            var oficinas = from m in _context.Oficinas select m;
+
+            // se local contem uma string
+            if (!String.IsNullOrEmpty(local))
+            {
+                // modificar a query para filtrar as oficinas onde Localidade contem a string local
+                oficinas = oficinas.Where(s => s.Localidade!.Contains(local));
+            }
+
+            // query é executada aqui quando este metodo é invocado.
+            // Retorna à view (Index) um objeto do modelo do tipo Oficinas
+            // que contem uma lista de oficinas onde foi encontrado a string local no atributo Localidade
+            return View(await oficinas.ToListAsync());
+        }
+
+
         // GET: Oficinas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -48,7 +87,7 @@ namespace psi_2022_oficinas.Controllers
         // GET: Oficinas/Create
         public IActionResult Create()
         {
-            ViewData["IdGestor"] = new SelectList(_context.Gestores, "GestorID", "Email");
+            ViewData["IdGestor"] = new SelectList(_context.Gestores, "GestorID", "Nome");
             return View();
         }
 
@@ -65,7 +104,7 @@ namespace psi_2022_oficinas.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdGestor"] = new SelectList(_context.Gestores, "GestorID", "Email", oficinas.IdGestor);
+            //ViewData["IdGestor"] = new SelectList(_context.Gestores, "GestorID", "Email", oficinas.IdGestor);
             return View(oficinas);
         }
 
@@ -155,14 +194,14 @@ namespace psi_2022_oficinas.Controllers
             {
                 _context.Oficinas.Remove(oficinas);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OficinasExists(int id)
         {
-          return _context.Oficinas.Any(e => e.IdOficina == id);
+            return _context.Oficinas.Any(e => e.IdOficina == id);
         }
     }
 }
