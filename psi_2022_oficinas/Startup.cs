@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using psi_2022_oficinas.Models;
 
 namespace psi_2022_oficinas
 {
@@ -71,7 +72,7 @@ namespace psi_2022_oficinas
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddRoles<IdentityRole>() // ativa a utilização de Roles
+                    .AddRoles<IdentityRole>() // ativa a utilizaï¿½ï¿½o de Roles
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
@@ -106,7 +107,7 @@ namespace psi_2022_oficinas
             app.UseAuthentication();
             app.UseAuthorization();
 
-            // criar o utilizador Admin que será o primeiro utilizador da App
+            // criar o utilizador Admin que serï¿½ o primeiro utilizador da App
             CreateDefaultAdmin(roleManager, userManager);
 
             app.UseEndpoints(endpoints =>
