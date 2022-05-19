@@ -47,8 +47,7 @@ namespace psi_2022_oficinas.Data
                new IdentityRole { Id = "G", Name = "Gestor", NormalizedName = "GESTOR" }
             );
 
-            //insert DB seed
-
+            // sedd tabela MetodoPagamento
             modelBuilder.Entity<MetodoPagamento>().HasData(
                 new MetodoPagamento { IdPagamento = 1, TipoPagamento = "Multibanco" },
                 new MetodoPagamento { IdPagamento = 2, TipoPagamento = "MBway" },
@@ -56,13 +55,49 @@ namespace psi_2022_oficinas.Data
 
                 );
 
-            // seed para a tabela gestores
+            // seed tabela gestores
             modelBuilder.Entity<Gestores>().HasData(
                 new Gestores { GestorID = 1, Nome = "Gestor1", Email = "gestor1@mail.com" },
                 new Gestores { GestorID = 2, Nome = "Gestor2", Email = "gestor2@mail.com" },
                 new Gestores { GestorID = 3, Nome = "Gestor3", Email = "gestor3@mail.com" }
                 );
 
+            // seed tabela oficinas
+            modelBuilder.Entity<Oficinas>().HasData(
+                    new Oficinas
+                    {
+                        IdOficina = 1,
+                        Nome = "Aral",
+                        Imagem = "aral.png",
+                        Morada = "Avenida Condestável Dom Nuno Álvares Pereira, 2",
+                        Localidade = "Tomar",
+                        CodigoPostal = "2300-532",
+                        NumTelemovel = "249310070",
+                        IdGestor = 1
+                    },
+                    new Oficinas
+                    {
+                        IdOficina = 2,
+                        Nome = "Auto Ideal do Nabao",
+                        Imagem = "autoidealnabao.png",
+                        Morada = "Lugar do Alvito",
+                        Localidade = "Tomar",
+                        CodigoPostal = "2300-310",
+                        NumTelemovel = "249310810",
+                        IdGestor = 2
+                    },
+                     new Oficinas
+                     {
+                         IdOficina = 3,
+                         Nome = "Auto Barreiro",
+                         Imagem = "autobarreiro.png",
+                         Morada = " Estrada Barreiro 3 - B",
+                         Localidade = "Tomar",
+                         CodigoPostal = "2300-442",
+                         NumTelemovel = "249316896",
+                         IdGestor = 3
+                     }
+                );
         }
 
         // Representar as Tabelas da BD

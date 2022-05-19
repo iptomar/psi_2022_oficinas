@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using psi_2022_oficinas.Data;
 
@@ -11,9 +12,10 @@ using psi_2022_oficinas.Data;
 namespace psi_2022_oficinas.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220519100415_OficinasImagLocal")]
+    partial class OficinasImagLocal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,21 +54,21 @@ namespace psi_2022_oficinas.Data.Migrations
                         new
                         {
                             Id = "C",
-                            ConcurrencyStamp = "1a23699b-d9bd-4998-beaa-346a34e58117",
+                            ConcurrencyStamp = "d5f2c52f-e23a-4bc8-82a8-e97af40286f9",
                             Name = "Cliente",
                             NormalizedName = "CLIENTE"
                         },
                         new
                         {
                             Id = "A",
-                            ConcurrencyStamp = "87189018-9ce4-432e-9553-b9fb09350c9f",
+                            ConcurrencyStamp = "9344830a-b66f-4da0-9061-818d671e8cd5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "G",
-                            ConcurrencyStamp = "93937725-1a7b-4e38-86d9-42ef825d08f5",
+                            ConcurrencyStamp = "02ec590e-e2b3-42a2-aed1-349e4e861467",
                             Name = "Gestor",
                             NormalizedName = "GESTOR"
                         });
@@ -473,41 +475,6 @@ namespace psi_2022_oficinas.Data.Migrations
                     b.HasIndex("IdGestor");
 
                     b.ToTable("Oficinas");
-
-                    b.HasData(
-                        new
-                        {
-                            IdOficina = 1,
-                            CodigoPostal = "2300-532",
-                            IdGestor = 1,
-                            Imagem = "aral.png",
-                            Localidade = "Tomar",
-                            Morada = "Avenida Condestável Dom Nuno Álvares Pereira, 2",
-                            Nome = "Aral",
-                            NumTelemovel = "249310070"
-                        },
-                        new
-                        {
-                            IdOficina = 2,
-                            CodigoPostal = "2300-310",
-                            IdGestor = 2,
-                            Imagem = "autoidealnabao.png",
-                            Localidade = "Tomar",
-                            Morada = "Lugar do Alvito",
-                            Nome = "Auto Ideal do Nabao",
-                            NumTelemovel = "249310810"
-                        },
-                        new
-                        {
-                            IdOficina = 3,
-                            CodigoPostal = "2300-442",
-                            IdGestor = 3,
-                            Imagem = "autobarreiro.png",
-                            Localidade = "Tomar",
-                            Morada = " Estrada Barreiro 3 - B",
-                            Nome = "Auto Barreiro",
-                            NumTelemovel = "249316896"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
