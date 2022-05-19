@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using psi_2022_oficinas.Data;
 
@@ -11,9 +12,10 @@ using psi_2022_oficinas.Data;
 namespace psi_2022_oficinas.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220512144508_Registo")]
+    partial class Registo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,21 +54,21 @@ namespace psi_2022_oficinas.Data.Migrations
                         new
                         {
                             Id = "C",
-                            ConcurrencyStamp = "5153e2d8-2c2b-4ab6-ac95-546c955e95e4",
+                            ConcurrencyStamp = "a5eef5eb-f10e-4ad0-878b-159d42a91c76",
                             Name = "Cliente",
                             NormalizedName = "CLIENTE"
                         },
                         new
                         {
                             Id = "A",
-                            ConcurrencyStamp = "67d75079-52c3-4d41-8699-5b060ed02e5f",
+                            ConcurrencyStamp = "adb27f4f-f2f9-4fdb-ad41-b28340bca4af",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "G",
-                            ConcurrencyStamp = "f65ef2d8-14f0-4cfa-aa7f-e764ecbae341",
+                            ConcurrencyStamp = "0e1a65e9-900e-470c-9aad-3e89afd14396",
                             Name = "Gestor",
                             NormalizedName = "GESTOR"
                         });
@@ -281,15 +283,13 @@ namespace psi_2022_oficinas.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("NCartaConducao")
-                        .IsRequired()
+                    b.Property<int>("NCartaConducao")
                         .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("NIF")
-                        .IsRequired()
+                    b.Property<int>("NIF")
                         .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Ntelemovel")
                         .IsRequired()
