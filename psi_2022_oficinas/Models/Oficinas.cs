@@ -12,7 +12,10 @@ namespace psi_2022_oficinas.Models
         public Oficinas()
         {
             ListaMarcacoes = new HashSet<Marcacoes>();
+            ListaServicos = new HashSet<Serviços>();
         }
+
+        //##################################################################################
 
         /// <summary>
         /// Identificador da Oficina
@@ -78,5 +81,10 @@ namespace psi_2022_oficinas.Models
         /// Marcações na Oficina
         /// </summary>
         public ICollection<Marcacoes> ListaMarcacoes { get; set; }
+
+        /// <summary>
+        ///  Serviços da Oficina
+        /// </summary>
+        public ICollection<Serviços> ListaServicos { get; set; }
     }
 }
