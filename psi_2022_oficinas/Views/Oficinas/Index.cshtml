@@ -1,25 +1,22 @@
 @model IEnumerable<psi_2022_oficinas.Models.Oficinas>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = ".:: Oficinas ::.";
 }
 
-<h1>Index</h1>
+<h1>Lista de oficinas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Registar nova oficina</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Imagem)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Morada)
+                @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Localidade)
@@ -37,35 +34,49 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Imagem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Morada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Localidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodigoPostal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumTelemovel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gestor.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdOficina">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdOficina">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdOficina">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var oficina in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(oficina.Imagem))
+                    {
+                        @*<a href="~/Images/@oficina.Imagem" target="_blank">*@
+
+                        <a asp-action="Details" asp-route-id="@oficina.IdOficina">
+
+                            <img src="~/Images/@oficina.Imagem"
+                                 alt="@Html.DisplayFor(modelItem => oficina.Nome)"
+                                 title="@oficina.Nome" height="100" />
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/Images/@oficina.Imagem"
+                             alt="@Html.DisplayFor(modelItem => oficina.Nome)"
+                             title="@oficina.Nome" height="50" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => oficina.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => oficina.Localidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => oficina.CodigoPostal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => oficina.NumTelemovel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => oficina.Gestor.Nome)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@oficina.IdOficina">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@oficina.IdOficina">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@oficina.IdOficina">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
