@@ -5,22 +5,44 @@
 }
 
 <h1>Edit</h1>
-
 <h4>Oficinas</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        @*enctype="multipart/form-data" permite enviar ficheiros do browser para o servidor*@
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <input type="hidden" asp-for="IdOficina" />
+            <input type="hidden" asp-for="Imagem" />
+
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Imagem" class="control-label"></label>
-                <input asp-for="Imagem" class="form-control" />
+                @* imagem da oficina *@
+                <a href="~/Images/@Model.Imagem" target="_blank">
+                    <img src="~/Images/@Model.Imagem"
+                         alt="@Html.DisplayFor(modelItem => Model.Nome)"
+                         title="@Model.Nome"
+                         height="100"
+                         class="form-group" />
+                </a>
+
+                @if (!(Model.Imagem.StartsWith("default_")))
+                {
+                    @* check box para controlo do uso da imagem da oficina *@
+                    <input type="checkbox" data-val="true" name="useDefaultImg" value="true">
+                    <input name="useDefaultImg" type="hidden" value="false">
+                    <label class="control-label">Usar imagem default</label>
+
+                }
+                @* indicar uma imagem do tipo jpg ou png para a oficina *@
+                <input type="file" name="oficinaImag" class="form-control" accept=".jpg,.png" />
                 <span asp-validation-for="Imagem" class="text-danger"></span>
             </div>
             <div class="form-group">

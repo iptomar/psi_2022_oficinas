@@ -10,47 +10,64 @@
     <h4>Oficinas</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nome)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Imagem)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Imagem)
+        <dd class="col-sm-10">
+            @* imagem da oficina *@
+            @if (!string.IsNullOrEmpty(Model.Imagem))
+            {
+                @* imagem contem um link que quando ativado a imagem é
+                    visualizada numa nova janela do browser*@
+                <a href="~/Images/@Model.Imagem" target="_blank">
+                    <img src="~/Images/@Model.Imagem"
+                         alt="@Html.DisplayFor(modelItem => Model.Nome)"
+                         title="@Model.Nome"
+                         height="100" />
+                </a>
+            }
+            else
+            {
+                <img src="~/Images/@Model.Imagem"
+                     alt="@Html.DisplayFor(modelItem => Model.Nome)"
+                     title="@Model.Nome" height="50" />
+            }
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Morada)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Morada)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Localidade)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Localidade)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CodigoPostal)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CodigoPostal)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NumTelemovel)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NumTelemovel)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Gestor)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gestor.Email)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gestor.Nome)
         </dd>
     </dl>
 </div>

@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
@@ -19,7 +19,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Imagem" class="control-label"></label>
-                <input asp-for="Imagem" class="form-control" />
+                @* imagem da oficina por omissão *@
+                <img src="~/Images/@ViewBag.defaultImg"
+                     alt="default image"
+                     title="Default Image"
+                     height="100"
+                     class="form-group"
+                     style="border:2px solid black;" />
+                @* indicar uma imagem do tipo jpg ou png para a oficina *@
+                <input type="file" name="oficinaImag" class="form-control" accept=".jpg,.png" />
                 <span asp-validation-for="Imagem" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdGestor" class="control-label"></label>
-                <select asp-for="IdGestor" class ="form-control" asp-items="ViewBag.IdGestor"></select>
+                <select asp-for="IdGestor" class="form-control" asp-items="ViewBag.IdGestor"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
