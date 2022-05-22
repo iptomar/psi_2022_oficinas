@@ -20,14 +20,16 @@
             @Html.DisplayNameFor(model => model.Imagem)
         </dt>
         <dd class="col-sm-10">
-
+            @* imagem da oficina *@
             @if (!string.IsNullOrEmpty(Model.Imagem))
             {
-                <a href="~/Images/@Model.Imagem" target="_top">
-
+                @* imagem contem um link que quando ativado a imagem é
+                    visualizada numa nova janela do browser*@
+                <a href="~/Images/@Model.Imagem" target="_blank">
                     <img src="~/Images/@Model.Imagem"
                          alt="@Html.DisplayFor(modelItem => Model.Nome)"
-                         title="@Model.Nome" height="100" />
+                         title="@Model.Nome"
+                         height="100" />
                 </a>
             }
             else

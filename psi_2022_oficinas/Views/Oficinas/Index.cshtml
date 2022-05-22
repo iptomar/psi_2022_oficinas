@@ -43,10 +43,9 @@
                         @*<a href="~/Images/@oficina.Imagem" target="_blank">*@
 
                         <a asp-action="Details" asp-route-id="@oficina.IdOficina">
-
                             <img src="~/Images/@oficina.Imagem"
                                  alt="@Html.DisplayFor(modelItem => oficina.Nome)"
-                                 title="@oficina.Nome" height="100" />
+                                 title="@oficina.Nome" height="64" />
                         </a>
                     }
                     else
