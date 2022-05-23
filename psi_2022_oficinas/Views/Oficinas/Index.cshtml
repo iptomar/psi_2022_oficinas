@@ -1,4 +1,6 @@
-@model IEnumerable<psi_2022_oficinas.Models.Oficinas>
+@model psi_2022_oficinas.Models.OficinaLocalViewModel
+@* a vsisualização da listagem das oficinas é com base no filtro auxilidado pela classe OficinaLocalViewModel*@
+@* @model IEnumerable<psi_2022_oficinas.Models.Oficinas>*@
 
 @{
     ViewData["Title"] = ".:: Oficinas ::.";
@@ -9,39 +11,55 @@
 <p>
     <a asp-action="Create">Registar nova oficina</a>
 </p>
+
+@*--------------Formulario-de-filtro-oficinas-------------*@
+<form asp-controller="Oficinas" asp-action="Index" method="get">
+    <p>
+        @*lista dropdown com todas as localidades. Seleção unica*@
+        Localidade:
+        <select asp-for="Local" asp-items="Model.Localidades">
+            <option value="">Todas</option>
+        </select>
+        @*textbox para o nome*@
+        Nome:
+        <input type="text" name="Nome" />
+        @*submeter os valores amazenados em Local e Nome para o controller*@
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
+@*---------------------------------------------------------*@
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Imagem)
+                @Html.DisplayNameFor(model => model.Oficinas[0].Imagem)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.Oficinas[0].Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Localidade)
+                @Html.DisplayNameFor(model => model.Oficinas[0].Localidade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodigoPostal)
+                @Html.DisplayNameFor(model => model.Oficinas[0].CodigoPostal)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumTelemovel)
+                @Html.DisplayNameFor(model => model.Oficinas[0].NumTelemovel)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Gestor)
+                @Html.DisplayNameFor(model => model.Oficinas[0].Gestor)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var oficina in Model)
+        @foreach (var oficina in Model.Oficinas)
         {
             <tr>
                 <td>
+                    @*apresenta a imagem da oficina, caso exitsta, com link para os respetivos detalhes*@
                     @if (!string.IsNullOrEmpty(oficina.Imagem))
                     {
-                        @*<a href="~/Images/@oficina.Imagem" target="_blank">*@
-
                         <a asp-action="Details" asp-route-id="@oficina.IdOficina">
                             <img src="~/Images/@oficina.Imagem"
                                  alt="@Html.DisplayFor(modelItem => oficina.Nome)"
@@ -50,9 +68,8 @@
                     }
                     else
                     {
-                        <img src="~/Images/@oficina.Imagem"
-                             alt="@Html.DisplayFor(modelItem => oficina.Nome)"
-                             title="@oficina.Nome" height="50" />
+                        @* se a imagem não existir mostra o nome*@
+                        @Html.DisplayFor(modelItem => oficina.Nome);
                     }
                 </td>
                 <td>

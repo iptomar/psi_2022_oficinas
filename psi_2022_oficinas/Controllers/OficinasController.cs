@@ -13,7 +13,6 @@ namespace psi_2022_oficinas.Controllers
     public class OficinasController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public OficinasController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
@@ -23,51 +22,50 @@ namespace psi_2022_oficinas.Controllers
 
         }
 
-        // GET: Oficinas
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Oficinas.Include(o => o.Gestor);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
-        // procurar oficinas por localidade
-        //public async Task<IActionResult> Index(string local)
+        //// GET: Oficinas
+        //public async Task<IActionResult> Index()
         //{
-        //    // define a query LINQ para selecionar as oficinas
-        //    var oficinas = from m in _context.Oficinas select m;
-
-        //    // se local contem uma string
-        //    if (!String.IsNullOrEmpty(local))
-        //    {
-        //        // modificar a query para filtrar as oficinas onde Localidade contem a string local
-        //        oficinas = oficinas.Where(s => s.Localidade!.Contains(local));
-        //    }
-
-        //    // query é executada aqui quando este metodo é invocado.
-        //    // Retorna à view (Index) um objeto do modelo do tipo Oficinas
-        //    // que contem uma lista de oficinas onde foi encontrado a string local no atributo Localidade
-        //    return View(await oficinas.ToListAsync());
+        //    var applicationDbContext = _context.Oficinas.Include(o => o.Gestor);
+        //    return View(await applicationDbContext.ToListAsync());
         //}
 
-        // procurar oficinas por localidade
-        public async Task<IActionResult> Search(string local)
+        /// <summary>
+        /// Providencia a listagem das oficinas com optção de filtro por localidade e/ou nome
+        /// </summary>
+        /// <param name="local">Parametro de filtro para a localidade</param>
+        /// <param name="nome">Parametro de filtro para o nome</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Index(string local, string nome)
         {
+            // define a query LINQ para obter todas as localidades
+            IQueryable<string> localQuery = from m in _context.Oficinas
+                                            orderby m.Localidade
+                                            select m.Localidade;
             // define a query LINQ para selecionar as oficinas
             var oficinas = from m in _context.Oficinas select m;
-
-            // se local contem uma string
-            if (!String.IsNullOrEmpty(local))
+            // se a string nome for vazia ou nula
+            if (!String.IsNullOrEmpty(nome))
             {
-                // modificar a query para filtrar as oficinas onde Localidade contem a string local
-                oficinas = oficinas.Where(s => s.Localidade!.Contains(local));
+                // modificar a query para filtrar todas as oficinas cujo o Nome contem a string nome
+                oficinas = oficinas.Where(s => s.Nome!.Contains(nome));
+            }
+            // se a string local é vazia ou nula 
+            if (!string.IsNullOrEmpty(local))
+            {
+                // modificar a query para filtrar todas as oficinas cujo a Localidade é igual à string local
+                oficinas = oficinas.Where(x => x.Localidade == local);
             }
 
-            // query é executada aqui quando este metodo é invocado.
-            // Retorna à view (Index) um objeto do modelo do tipo Oficinas
-            // que contem uma lista de oficinas onde foi encontrado a string local no atributo Localidade
-            return View(await oficinas.ToListAsync());
+            var oficinaLocalidadeVM = new OficinaLocalViewModel
+            {
+                // obter a lista das localidades sem duplicados
+                Localidades = new SelectList(await localQuery.Distinct().ToListAsync()),
+                // obter a lista de oficinas
+                Oficinas = await oficinas.ToListAsync()
+            };
+            // retorna o resultado do filtro
+            return View(oficinaLocalidadeVM);
         }
-
 
         // GET: Oficinas/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -125,8 +123,17 @@ namespace psi_2022_oficinas.Controllers
                 // caminho absoluto da copia da imagem carservice64.png com o nome no formato especificado
                 string newImagPath = Path.Combine(imagStorage, newImagName);
 
-                // efetuar a copia da imagem
-                System.IO.File.Copy(defaultImagPath, newImagPath);
+                try
+                {
+                    // efetuar a copia da imagem
+                    System.IO.File.Copy(defaultImagPath, newImagPath);
+                }
+                catch (Exception)
+                {
+                    // mostrar mensagem de erro ao utilizador
+                    ModelState.AddModelError("", "Erro ao guardar o registo. Imagem default não encontrada.");
+                    return View(oficinas);
+                }
 
                 // adicionar a imagem à oficina
                 oficinas.Imagem = newImagName;
@@ -143,7 +150,7 @@ namespace psi_2022_oficinas.Controllers
                 else
                 {
                     // Normalizar um novo nome para a imagem no formato. oid_<oficinaID>_guid
-                    string imagName = "oficina_" + Guid.NewGuid().ToString();
+                    string imagName = Guid.NewGuid().ToString();
                     string imagTypeExt = Path.GetExtension(oficinaImag.FileName).ToString();
                     imagName += imagTypeExt;
 
@@ -236,8 +243,17 @@ namespace psi_2022_oficinas.Controllers
 
                 string oldImagPath = Path.Combine(imagStorage, oficinas.Imagem.ToString());
 
-                // efetuar a copia da imagem
-                System.IO.File.Copy(defaultImagPath, newImagPath);
+                try
+                {
+                    // efetuar a copia da imagem
+                    System.IO.File.Copy(defaultImagPath, newImagPath);
+                }
+                catch (Exception)
+                {
+                    // mostrar mensagem de erro ao utilizador
+                    ModelState.AddModelError("", "Ocorreu erro durante a edição deste registo. Não é possivel neste momento usar a imagem default.");
+                    return View(oficinas);
+                }
 
                 // remove a imagem antiga
                 System.IO.File.Delete(oldImagPath);
@@ -393,9 +409,9 @@ namespace psi_2022_oficinas.Controllers
                 // guardar o ficheiro (imagem)
                 await file.CopyToAsync(stream);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ModelState.AddModelError("", "Ocurreu um erro ao tentar guardar a imagem. " + ex.Message);
+                ModelState.AddModelError("", "Ocurreu um erro ao tentar guardar a imagem.");
             }
         }
     }
