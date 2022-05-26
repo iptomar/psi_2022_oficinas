@@ -1,0 +1,77 @@
+﻿@model IEnumerable<psi_2022_oficinas.Models.Marcacoes>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassServico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoServico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Caucao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pagamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Oficina)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassServico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoServico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Caucao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pagamento.IdPagamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Apelido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Oficina.CodigoPostal)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdMarcacao">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdMarcacao">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdMarcacao">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
