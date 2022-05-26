@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using psi_2022_oficinas.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul>
+@if (SignInManager.IsSignedIn(User))
+{
+    <a style="color:#0077cc" class="w3-bar-item w3-button w3-hide-small w3-hover-white" asp-controller="Oficinas" asp-action="Index">Oficinas</a>
+
+    <a style="color:#0077cc" class="w3-bar-item w3-button w3-hide-small w3-hover-white" asp-controller="Marcacoes" asp-action="Index">Marcações</a>
+}
+
+</ul>

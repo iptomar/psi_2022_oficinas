@@ -2,7 +2,171 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Oficinas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body id="myPage">
+
+<!-- Sidebar on click -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-card w3-animate-left w3-xxlarge" style="display:none;z-index:2" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-display-topright w3-text-teal">Close
+    <i class="fa fa-remove"></i>
+  </a>
+  <a class="w3-bar-item w3-button">Ar Condicionado</a>
+  <a class="w3-bar-item w3-button">Estofos</a>
+  <a class="w3-bar-item w3-button">Vidros</a>
+  <a class="w3-bar-item w3-button">Pneus</a>
+  <a class="w3-bar-item w3-button">Inspeção Periódica</a>
+  <a class="w3-bar-item w3-button">Bate-chapas</a>
+  <a class="w3-bar-item w3-button">Cortesia/Mobilidade</a>
+  <a class="w3-bar-item w3-button">Lavagem</a>
+  <a class="w3-bar-item w3-button">Tuning</a>
+  <a class="w3-bar-item w3-button">Assistência em Viagem</a>
+  <a class="w3-bar-item w3-button">GPL Auto</a>
+</nav>
+
+
+
+<!-- Image Header -->
+<div class="w3-display-container w3-animate-opacity">
+  <img src="/images/imagemfundo.jpg" alt="boat" style="width:100%;min-height:350px;max-height:400px;">
 </div>
+
+
+
+<!-- Work Row -->
+<div class="w3-row-padding w3-padding-64 w3-theme-l1" id="work">
+
+<div class="w3-quarter">
+<h2>AgendaCar</h2>
+<p>A AgendaCar está em Portugal desde a aula de PSI no dia 13 de maio de 2022, tem como foco sua distribuição exclusivamente em território nacional. O primeiro produto da AgendaCar foram os tubos de escape. Foi através deste componente que a AgendaCar conquistaria o seu espaço na área de após-venda, ocupando, atualmente, todo o tipo de serviços de reparação rápida de automóveis, como: </p>
+</div>
+
+<div class="w3-quarter">
+<div class="w3-card w3-white">
+  <img src="/images/mecanica.jpg" alt="Snow" style="width:100%">
+  <div class="w3-container">
+  <h3>Mecânica</h3>
+  </div>
+  </div>
+</div>
+
+<div class="w3-quarter">
+<div class="w3-card w3-white">
+  <img src="/images/eletronica.jpeg" alt="Lights" style="width:100%">
+  <div class="w3-container">
+  <h3>Eletrónica</h3>
+  </div>
+  </div>
+</div>
+
+<div class="w3-quarter">
+<div class="w3-card w3-white">
+  <img src="/images/pintura.jpg" alt="Mountains" style="width:100%">
+  <div class="w3-container">
+  <h3>Pintura</h3>
+  </div>
+  </div>
+</div>
+
+
+<!-- Container -->
+<div class="w3-container" style="position:relative">
+  <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+  style="position:absolute;top:-28px;right:24px">+</a>
+</div>
+
+
+<!-- Team Container -->
+<div class="w3-container w3-padding-64 w3-center" id="team">
+<h2>OUR TEAM</h2>
+<p>Meet the team - our office rats:</p>
+
+<div class="w3-row" style="display:flex"><br>
+
+<div class="w3-quarter">
+  <h3>Maria Inês Vinhas</h3>
+</div>
+
+<div class="w3-quarter">
+  <h3>Daniel Trindade</h3>
+</div>
+
+<div class="w3-quarter">
+  <h3>Tomás Silva</h3>
+</div>
+
+<div class="w3-quarter">
+  <h3>Gonçalo Baião</h3>
+</div>
+
+<div class="w3-quarter">
+  <h3>Pedro Silveira</h3>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+
+
+
+<!-- Contact Container -->
+<div class="w3-container w3-padding-64 w3-theme-l5" id="contact">
+  <div class="w3-row">
+    <div class="w3-col m5">
+    <div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contactos</span></div>
+@*      <h3>Address</h3>
+*@      <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>  Instituto Politécnico de Tomar, PT</p>
+      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  +351 911111111</p>
+      <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>  AgendaCar@gmail.com</p>
+    </div>
+  </div>
+</div>
+
+<!-- Image of location/map -->
+<img src="/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%;">
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
+  <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>   
+    <a class="w3-button w3-theme" href="#myPage"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+</footer>
+
+<script>
+// Script for side navigation
+function w3_open() {
+  var x = document.getElementById("mySidebar");
+  x.style.width = "300px";
+  x.style.paddingTop = "10%";
+  x.style.display = "block";
+}
+
+// Close side navigation
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
+</html>
