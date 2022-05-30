@@ -15,7 +15,7 @@ namespace psi_2022_oficinas.Data.Migrations
                 column: "ConcurrencyStamp",
                 value: "08742509-6aaa-41b9-a956-22828f15a0c8");
 
-            migrationBuilder.UpdateData(
+            migrationBuilder.UpdateData( 
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: "C",
