@@ -69,6 +69,17 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Gestor.Nome)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ListaServicos)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var servico in Model.ListaServicos)
+                        {
+                            <span>
+                                @servico.Servico <br />
+                            </span>
+                        }
+        </dd>
     </dl>
 </div>
 <div>

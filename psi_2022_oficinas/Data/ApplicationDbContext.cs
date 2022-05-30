@@ -72,7 +72,7 @@ namespace psi_2022_oficinas.Data
                 new Gestores { GestorID = 13, Nome = "Gestor13", Email = "gestor13@mail.com" }
                 );
 
-            modelBuilder.Entity<Serviços>().HasData(
+            var listaServicos = new List<Serviços> {
                 new Serviços { IdServ = 1, Servico = "Ar Condicionado" },
                 new Serviços { IdServ = 2, Servico = "Estofos" },
                 new Serviços { IdServ = 3, Servico = "Vidros" },
@@ -87,7 +87,151 @@ namespace psi_2022_oficinas.Data
                 new Serviços { IdServ = 12, Servico = "Tuning" },
                 new Serviços { IdServ = 13, Servico = "Assistência em Viagem" },
                 new Serviços { IdServ = 14, Servico = "GPL Auto" }
+            };
+
+
+            modelBuilder.Entity<Serviços>().HasData(
+                listaServicos
             );
+
+
+            modelBuilder.Entity("OficinasServiços").HasData(
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 1, ["ListaServicosIdServ"] = 10 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 1, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 1, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 1, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 1, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 1, ["ListaServicosIdServ"] = 2 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 1, ["ListaServicosIdServ"] = 8 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 1, ["ListaServicosIdServ"] = 14 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 2, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 2, ["ListaServicosIdServ"] = 2 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 2, ["ListaServicosIdServ"] = 3 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 2, ["ListaServicosIdServ"] = 5 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 2, ["ListaServicosIdServ"] = 6 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 2, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 2, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 2, ["ListaServicosIdServ"] = 8 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 2, ["ListaServicosIdServ"] = 9 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 3, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 3, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 3, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 3, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 3, ["ListaServicosIdServ"] = 2 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 3, ["ListaServicosIdServ"] = 5 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 3, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 3, ["ListaServicosIdServ"] = 12 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 3, ["ListaServicosIdServ"] = 3 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 2 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 10 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 5 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 3 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 13 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 6 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 8 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 4, ["ListaServicosIdServ"] = 14 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 5, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 5, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 5, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 5, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 5, ["ListaServicosIdServ"] = 14 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 6, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 6, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 6, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 6, ["ListaServicosIdServ"] = 6 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 6, ["ListaServicosIdServ"] = 8 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 6, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 6, ["ListaServicosIdServ"] = 4 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 5 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 3 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 6 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 8 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 2 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 7, ["ListaServicosIdServ"] = 12 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 2 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 10 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 5 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 3 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 13 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 6 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 8 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 8, ["ListaServicosIdServ"] = 9 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 2 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 6 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 10 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 8 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 9, ["ListaServicosIdServ"] = 3 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 10, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 10, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 10, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 10, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 10, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 10, ["ListaServicosIdServ"] = 5 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 10, ["ListaServicosIdServ"] = 3 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 10, ["ListaServicosIdServ"] = 13 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 11, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 11, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 11, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 11, ["ListaServicosIdServ"] = 6 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 14 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 10 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 8 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 2 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 5 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 3 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 12, ["ListaServicosIdServ"] = 6 },
+
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 1 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 14 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 10 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 7 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 11 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 8 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 9 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 2 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 5 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 13 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 4 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 12 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 3 },
+                new Dictionary<string, object> { ["ListaOficinasIdOficina"] = 13, ["ListaServicosIdServ"] = 6 }
+
+                );
 
 
             modelBuilder.Entity<Oficinas>().HasData(
