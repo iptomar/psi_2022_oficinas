@@ -42,7 +42,10 @@ namespace psi_2022_oficinas.Controllers
                                             orderby m.Localidade
                                             select m.Localidade;
             // define a query LINQ para selecionar as oficinas
-            var oficinas = from m in _context.Oficinas select m;
+            var oficinas = from m in _context.Oficinas
+                           .Include(o => o.Gestor)
+                           .Include(s => s.ListaServicos)
+                           select m;
             // se a string nome for vazia ou nula
             if (!String.IsNullOrEmpty(nome))
             {
@@ -77,6 +80,7 @@ namespace psi_2022_oficinas.Controllers
 
             var oficinas = await _context.Oficinas
                 .Include(o => o.Gestor)
+                .Include(s => s.ListaServicos)
                 .FirstOrDefaultAsync(m => m.IdOficina == id);
             if (oficinas == null)
             {
@@ -91,6 +95,7 @@ namespace psi_2022_oficinas.Controllers
         {
             ViewData["IdGestor"] = new SelectList(_context.Gestores, "GestorID", "Nome");
             ViewData["defaultImg"] = "carservice64.png";
+            ViewBag.ListaServicos = _context.Serviços.OrderBy(s => s.IdServ).ToList();
 
             return View();
         }
@@ -106,8 +111,36 @@ namespace psi_2022_oficinas.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdOficina,Nome,Imagem,Morada,Localidade,CodigoPostal,NumTelemovel,IdGestor")] Oficinas oficinas, IFormFile oficinaImag)
+        public async Task<IActionResult> Create([Bind("IdOficina,Nome,Imagem,Morada,Localidade,CodigoPostal,NumTelemovel,IdGestor")] Oficinas oficina, IFormFile oficinaImag, int[] ServicoEscolhido)
         {
+
+            // avalia se o array com a lista de serviços escolhidos associados à oficina está vazio ou não
+            if (ServicoEscolhido.Length == 0)
+            {
+                //É gerada uma mensagem de erro
+                ModelState.AddModelError("", "É necessário selecionar pelo menos um serviço.");
+                // gerar a lista serviços que podem ser associados à oficina
+                ViewBag.ListaServicos = _context.Serviços.OrderBy(s => s.IdServ).ToList();
+                // devolver controlo à View
+                return View(oficina);
+            }
+
+            // criar uma lista com os objetos escolhidos dos serviços
+            List<Serviços> listaDeServicosEscolhidos = new List<Serviços>();
+            // Para cada objeto escolhido..
+            foreach (int item in ServicoEscolhido)
+            {
+                //procurar o serviço
+                Serviços servicos = _context.Serviços.Find(item);
+                // adicionar o serviço à lista
+                listaDeServicosEscolhidos.Add(servicos);
+            }
+
+            // adicionar a lista ao objeto de "Oficinas"
+            oficina.ListaServicos = listaDeServicosEscolhidos;
+
+            //#########################################################################3
+
             // Se o utilizador não forneceu um ficheiro (imagem)
             if (oficinaImag == null)
             {
@@ -132,11 +165,11 @@ namespace psi_2022_oficinas.Controllers
                 {
                     // mostrar mensagem de erro ao utilizador
                     ModelState.AddModelError("", "Erro ao guardar o registo. Imagem default não encontrada.");
-                    return View(oficinas);
+                    return View(oficina);
                 }
 
                 // adicionar a imagem à oficina
-                oficinas.Imagem = newImagName;
+                oficina.Imagem = newImagName;
             }
             else
             {
@@ -145,7 +178,7 @@ namespace psi_2022_oficinas.Controllers
                 {
                     // mostrar mensagem de erro ao utilizador
                     ModelState.AddModelError("", "Só é permitido imagens to tipo jpeg ou png");
-                    return View(oficinas);
+                    return View(oficina);
                 }
                 else
                 {
@@ -155,7 +188,7 @@ namespace psi_2022_oficinas.Controllers
                     imagName += imagTypeExt;
 
                     // adicionar a imagem à oficina
-                    oficinas.Imagem = imagName;
+                    oficina.Imagem = imagName;
                 }
             }
             // Se os dados fornecidos pelo utilizador forem válidos
@@ -164,7 +197,7 @@ namespace psi_2022_oficinas.Controllers
                 try
                 {
                     // preparar para guarda os dados na bd
-                    _context.Add(oficinas);
+                    _context.Add(oficina);
                     // guardar os dados na bd
                     await _context.SaveChangesAsync();
 
@@ -173,7 +206,7 @@ namespace psi_2022_oficinas.Controllers
                 {
                     // Ups! Ocorreu um problema. Mostrar mensagem de erro.
                     ModelState.AddModelError("", "Não foi possivel guardar o registo na base de dados");
-                    return View(oficinas);
+                    return View(oficina);
                 }
                 // Se o utilizador forneceu um ficheiro (imagem)
                 if (oficinaImag != null)
@@ -187,7 +220,7 @@ namespace psi_2022_oficinas.Controllers
                         Directory.CreateDirectory(imagStorage);
                     }
                     // caminho absoluto da imagem da oficina no servidor
-                    string imagOficina = Path.Combine(imagStorage, oficinas.Imagem);
+                    string imagOficina = Path.Combine(imagStorage, oficina.Imagem);
                     // guardar a imagem no caminho especificado
                     using var stream = new FileStream(imagOficina, FileMode.Create);
                     await oficinaImag.CopyToAsync(stream);
@@ -195,7 +228,7 @@ namespace psi_2022_oficinas.Controllers
                 // retorna à lista de oficinas
                 return RedirectToAction(nameof(Index));
             }
-            return View(oficinas);
+            return View(oficina);
         }
 
         // GET: Oficinas/Edit/5
@@ -206,18 +239,30 @@ namespace psi_2022_oficinas.Controllers
                 return RedirectToAction("Index");
             }
 
-            var oficinas = await _context.Oficinas.FindAsync(id);
-            if (oficinas == null)
+            var ofic = await _context.Oficinas
+                .Where(o => o.IdOficina == id)
+                .Include(o => o.ListaServicos)
+                .FirstOrDefaultAsync();
+
+            if (ofic == null)
             {
                 return RedirectToAction("Index");
             }
+
+            //###########################################################
+
+            // lista de todas os serviços existentes
+            ViewBag.ListaDeServicos = _context.Serviços.OrderBy(s => s.IdServ).ToList();
+
+            //###########################################################
+
             // obtem o nome do gestor associado à oficina
-            ViewData["IdGestor"] = new SelectList(_context.Gestores, "GestorID", "Nome", oficinas.IdGestor);
+            ViewData["IdGestor"] = new SelectList(_context.Gestores, "GestorID", "Nome", ofic.IdGestor);
 
             // variavel de sessão para guardar o id da oficina
             //HttpContext.Session.SetInt32("IdOficina", oficinas.IdOficina);
 
-            return View(oficinas);
+            return View(ofic);
         }
 
         // POST: Oficinas/Edit/5
@@ -225,7 +270,7 @@ namespace psi_2022_oficinas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdOficina,Nome,Imagem,Morada,Localidade,CodigoPostal,NumTelemovel,IdGestor")] Oficinas oficinas, IFormFile oficinaImag, string useDefaultImg)
+        public async Task<IActionResult> Edit(int id, [Bind("IdOficina,Nome,Imagem,Morada,Localidade,CodigoPostal,NumTelemovel,IdGestor")] Oficinas newOficina, IFormFile oficinaImag, string useDefaultImg, int[] ServicoEscolhido)
         {
 
             // se for verdadeiro é porque o utilizador marcou a checkbox para uso da imagem default para a oficina
@@ -241,7 +286,7 @@ namespace psi_2022_oficinas.Controllers
                 string newImagPath = Path.Combine(imagStorage, newImagName);
 
 
-                string oldImagPath = Path.Combine(imagStorage, oficinas.Imagem.ToString());
+                string oldImagPath = Path.Combine(imagStorage, newOficina.Imagem.ToString());
 
                 try
                 {
@@ -252,14 +297,14 @@ namespace psi_2022_oficinas.Controllers
                 {
                     // mostrar mensagem de erro ao utilizador
                     ModelState.AddModelError("", "Ocorreu erro durante a edição deste registo. Não é possivel neste momento usar a imagem default.");
-                    return View(oficinas);
+                    return View(newOficina);
                 }
 
                 // remove a imagem antiga
                 System.IO.File.Delete(oldImagPath);
 
                 // adicionar a imagem à oficina
-                oficinas.Imagem = newImagName;
+                newOficina.Imagem = newImagName;
             }
 
 
@@ -273,7 +318,7 @@ namespace psi_2022_oficinas.Controllers
                 {
                     // mostrar mensagem de erro ao utilizador
                     ModelState.AddModelError("", "Só é permitido imagens to tipo jpeg ou png");
-                    return View(oficinas);
+                    return View(newOficina);
                 }
                 else
                 {
@@ -283,37 +328,91 @@ namespace psi_2022_oficinas.Controllers
                     imagName += imagTypeExt;
 
                     // caminho absoluto da imagem no servidor
-                    string oficiaImagPath = Path.Combine(Path.Combine(_webHostEnvironment.WebRootPath, "Images"), oficinas.Imagem);
+                    string oficiaImagPath = Path.Combine(Path.Combine(_webHostEnvironment.WebRootPath, "Images"), newOficina.Imagem);
                     // remove a imagem antiga
                     System.IO.File.Delete(oficiaImagPath);
 
                     // adicionar o nome da imagem à oficina
-                    oficinas.Imagem = imagName;
+                    newOficina.Imagem = imagName;
                 }
             }
 
-            if (id != oficinas.IdOficina)
+            if (id != newOficina.IdOficina)
             {
                 return NotFound();
             }
+
+            //###############################################################
+
+            // dados anteriormente guardados da Oficina
+            var ofic = await _context.Oficinas
+                                       .Where(o => o.IdOficina == id)
+                                       .Include(o => o.ListaServicos)
+                                       .FirstOrDefaultAsync();
+
+            // obter a lista dos IDs dos servicos associadas à oficna, antes da edição
+            var oldListaServicos = ofic.ListaServicos
+                                           .Select(s => s.IdServ)
+                                           .ToList();
+
+            // avaliar se o utilizador alterou algum serviço associada à oficna
+            // adicionados -> lista de servicos adicionados
+            // retirados   -> lista de servicos retirados
+            var adicionados = ServicoEscolhido.Except(oldListaServicos);
+            var retirados = oldListaServicos.Except(ServicoEscolhido.ToList());
+
+            // se algum servico foi adicionado ou retirado
+            // é necessário alterar a lista de servicos 
+            // associada à oficina
+            if (adicionados.Any() || retirados.Any())
+            {
+
+                if (retirados.Any())
+                {
+                    // retirar o servico 
+                    foreach (int oldServico in retirados)
+                    {
+                        var servicoToRemove = ofic.ListaServicos.FirstOrDefault(c => c.IdServ == oldServico);
+                        ofic.ListaServicos.Remove(servicoToRemove);
+                    }
+                }
+                if (adicionados.Any())
+                {
+                    // adicionar o servico 
+                    foreach (int newServico in adicionados)
+                    {
+                        var servicoToAdd = await _context.Serviços.FirstOrDefaultAsync(s => s.IdServ == newServico);
+                        ofic.ListaServicos.Add(servicoToAdd);
+                    }
+                }
+            }
+
+            //###############################################################
 
             if (ModelState.IsValid)
             {
                 try
                 {
+
+                    ofic.Nome = newOficina.Nome;
+                    ofic.Morada = newOficina.Morada;
+                    ofic.CodigoPostal = newOficina.CodigoPostal;
+                    ofic.Localidade = newOficina.Localidade;
+                    ofic.NumTelemovel = newOficina.NumTelemovel;
+
                     // prepara para guardar os dados na bd
-                    _context.Update(oficinas);
+                    _context.Update(ofic);
                     // guarda os dados na bd
                     await _context.SaveChangesAsync();
                 }
                 catch (Exception)
                 {
                     // se ocorreu erro, verifica se o id da oficina fornecido existe
-                    if (!OficinasExists(oficinas.IdOficina))
+                    if (!OficinasExists(newOficina.IdOficina))
                     {
                         // id da oficina não encontrado
                         ModelState.AddModelError("", "Não foi possivel guardar o registo na base de dados. Id não encontrado.");
-                        return View(oficinas);
+                        return View(newOficina);
                     }
                     else
                     {
@@ -321,7 +420,7 @@ namespace psi_2022_oficinas.Controllers
                         ModelState.AddModelError("", "Não foi possivel guardar o registo na base de dados");
                         //throw;
                     }
-                    return View(oficinas);
+                    return View(newOficina);
                 }
 
                 if (imagName != null && oficinaImag != null)
@@ -333,8 +432,8 @@ namespace psi_2022_oficinas.Controllers
                 return RedirectToAction(nameof(Index));
             }
             // obtem o nome do gestor associado com a oficina
-            ViewData["IdGestor"] = new SelectList(_context.Gestores, "GestorID", "Nome", oficinas.IdGestor);
-            return View(oficinas);
+            ViewData["IdGestor"] = new SelectList(_context.Gestores, "GestorID", "Nome", newOficina.IdGestor);
+            return View(newOficina);
         }
 
         // GET: Oficinas/Delete/5
@@ -347,6 +446,7 @@ namespace psi_2022_oficinas.Controllers
 
             var oficinas = await _context.Oficinas
                 .Include(o => o.Gestor)
+                .Include(l => l.ListaServicos)
                 .FirstOrDefaultAsync(m => m.IdOficina == id);
             if (oficinas == null)
             {
