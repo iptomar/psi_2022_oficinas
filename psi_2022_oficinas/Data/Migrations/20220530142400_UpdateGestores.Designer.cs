@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using psi_2022_oficinas.Data;
 
@@ -11,9 +12,10 @@ using psi_2022_oficinas.Data;
 namespace psi_2022_oficinas.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220530142400_UpdateGestores")]
+    partial class UpdateGestores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,21 +54,21 @@ namespace psi_2022_oficinas.Data.Migrations
                         new
                         {
                             Id = "C",
-                            ConcurrencyStamp = "824d8155-930a-450c-b2d1-f15419048ee4",
+                            ConcurrencyStamp = "2ba845ee-f7a2-4619-bfb7-05ac6376e5a1",
                             Name = "Cliente",
                             NormalizedName = "CLIENTE"
                         },
                         new
                         {
                             Id = "A",
-                            ConcurrencyStamp = "08742509-6aaa-41b9-a956-22828f15a0c8",
+                            ConcurrencyStamp = "ffdb1269-803b-4416-8b6b-6c78adbd8c6f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "G",
-                            ConcurrencyStamp = "8385b1a9-4be2-40dd-8a2b-bf89c94e14ba",
+                            ConcurrencyStamp = "6268b351-77b3-47dc-a667-32a1d0605350",
                             Name = "Gestor",
                             NormalizedName = "GESTOR"
                         });
@@ -548,151 +550,6 @@ namespace psi_2022_oficinas.Data.Migrations
                     b.HasIndex("IdGestor");
 
                     b.ToTable("Oficinas");
-
-                    b.HasData(
-                        new
-                        {
-                            IdOficina = 1,
-                            CodigoPostal = "1400 - 145",
-                            IdGestor = 1,
-                            Imagem = "id1_boxcarvulcolisboa.jpg",
-                            Localidade = "Lisboa",
-                            Morada = "Rua Fernão Mendes Pinto Lote M-T",
-                            Nome = "Boxcar Vulco Lisboa",
-                            NumTelemovel = "912 360 073"
-                        },
-                        new
-                        {
-                            IdOficina = 2,
-                            CodigoPostal = "4705 - 084",
-                            IdGestor = 2,
-                            Imagem = "id2_braga.jpg",
-                            Localidade = "Braga",
-                            Morada = "Avenida Cidade do Porto n.º 182, Ferreiros",
-                            Nome = "Confiauto Braga",
-                            NumTelemovel = "252 248 500"
-                        },
-                        new
-                        {
-                            IdOficina = 3,
-                            CodigoPostal = "4445 - 245",
-                            IdGestor = 3,
-                            Imagem = "id3_autoarcadgua2.jpg",
-                            Localidade = "Valongo, Porto",
-                            Morada = "Rua 1º de Maio n.º 614B, Alfena",
-                            Nome = "Auto Arca D'Água 2",
-                            NumTelemovel = "229 689 811"
-                        },
-                        new
-                        {
-                            IdOficina = 4,
-                            CodigoPostal = "2900 - 395",
-                            IdGestor = 4,
-                            Imagem = "id4.jpg",
-                            Localidade = "Setúbal",
-                            Morada = "Rua Guilherme Gomes Fernandes n.º 1",
-                            Nome = "Manuel Jorge Santos Pereira",
-                            NumTelemovel = "921321817"
-                        },
-                        new
-                        {
-                            IdOficina = 5,
-                            CodigoPostal = "2825 - 895",
-                            IdGestor = 5,
-                            Imagem = "id5_jsa.jpg",
-                            Localidade = "Almada, Setúbal",
-                            Morada = "Rua 27 de Julho n.º 27, Trafaria",
-                            Nome = "JSA",
-                            NumTelemovel = "960 306 191"
-                        },
-                        new
-                        {
-                            IdOficina = 6,
-                            CodigoPostal = "3105-238",
-                            IdGestor = 6,
-                            Imagem = "id6_meiricarro.jpg",
-                            Localidade = "Pombal, Leiria",
-                            Morada = "Rua das Covinhas, Santiago de Litém",
-                            Nome = "MEIRICARRO",
-                            NumTelemovel = "236 948 477"
-                        },
-                        new
-                        {
-                            IdOficina = 7,
-                            CodigoPostal = "3500-188",
-                            IdGestor = 7,
-                            Imagem = "id7_automotor.jpg",
-                            Localidade = "Viseu",
-                            Morada = "Travassós de Baixo, Estrada São João da Carreira",
-                            Nome = "Automotorsport",
-                            NumTelemovel = "918 702 101"
-                        },
-                        new
-                        {
-                            IdOficina = 8,
-                            CodigoPostal = "3070-604",
-                            IdGestor = 8,
-                            Imagem = "id8.jpg",
-                            Localidade = "Mira, Coimbra",
-                            Morada = "Rua da Floresta n.º 255, Carapelhos",
-                            Nome = "Auto Carapelhos",
-                            NumTelemovel = "231 451 782"
-                        },
-                        new
-                        {
-                            IdOficina = 9,
-                            CodigoPostal = "2005-002",
-                            IdGestor = 9,
-                            Imagem = "id9_martinho.jpg",
-                            Localidade = "Santarém",
-                            Morada = "Rua Doutor Hilário Barreiro Nunes Lote 26B, Zona Industrial",
-                            Nome = "Martinho Auto",
-                            NumTelemovel = "243 302 228"
-                        },
-                        new
-                        {
-                            IdOficina = 10,
-                            CodigoPostal = "2460-477",
-                            IdGestor = 10,
-                            Imagem = "id10.jpg",
-                            Localidade = "Alcobaça, Leiria",
-                            Morada = "Zona Industrial Cabeço de Deus",
-                            Nome = "Auto Nogueiras",
-                            NumTelemovel = "262 585 252"
-                        },
-                        new
-                        {
-                            IdOficina = 11,
-                            CodigoPostal = "3800-301",
-                            IdGestor = 11,
-                            Imagem = "id11_corvauto.jpg",
-                            Localidade = "Aveiro",
-                            Morada = "Rua Duarte Ludgero, Esgueira",
-                            Nome = "Corvauto",
-                            NumTelemovel = "234 303 150"
-                        },
-                        new
-                        {
-                            IdOficina = 12,
-                            CodigoPostal = "5300-107",
-                            IdGestor = 12,
-                            Imagem = "id12.jpg",
-                            Localidade = "Bragança",
-                            Morada = "Avenida das Cantarias n.º 130",
-                            Nome = "Auto Imperial",
-                            NumTelemovel = "273 302 600"
-                        },
-                        new
-                        {
-                            IdOficina = 13,
-                            CodigoPostal = "8100-289",
-                            IdGestor = 13,
-                            Imagem = "id13_rinoauto.jpg",
-                            Localidade = "Loulé, Faro",
-                            Morada = "Cerro Cabeça de Câmara",
-                            Nome = "Rino - Auto Alexandre",
-                            NumTelemovel = "289 410 660"
-                        });
                 });
 
             modelBuilder.Entity("psi_2022_oficinas.Models.Serviços", b =>

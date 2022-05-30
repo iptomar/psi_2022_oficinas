@@ -55,11 +55,21 @@ namespace psi_2022_oficinas.Data
 
                 );
 
-            // seed tabela gestores
+            // seed para a tabela gestores
             modelBuilder.Entity<Gestores>().HasData(
                 new Gestores { GestorID = 1, Nome = "Gestor1", Email = "gestor1@mail.com" },
                 new Gestores { GestorID = 2, Nome = "Gestor2", Email = "gestor2@mail.com" },
-                new Gestores { GestorID = 3, Nome = "Gestor3", Email = "gestor3@mail.com" }
+                new Gestores { GestorID = 3, Nome = "Gestor3", Email = "gestor3@mail.com" },
+                new Gestores { GestorID = 4, Nome = "Gestor4", Email = "gestor4@mail.com" },
+                new Gestores { GestorID = 5, Nome = "Gestor5", Email = "gestor5@mail.com" },
+                new Gestores { GestorID = 6, Nome = "Gestor6", Email = "gestor6@mail.com" },
+                new Gestores { GestorID = 7, Nome = "Gestor7", Email = "gestor7@mail.com" },
+                new Gestores { GestorID = 8, Nome = "Gestor8", Email = "gestor8@mail.com" },
+                new Gestores { GestorID = 9, Nome = "Gestor9", Email = "gestor9@mail.com" },
+                new Gestores { GestorID = 10, Nome = "Gestor10", Email = "gestor10@mail.com" },
+                new Gestores { GestorID = 11, Nome = "Gestor11", Email = "gestor11@mail.com" },
+                new Gestores { GestorID = 12, Nome = "Gestor12", Email = "gestor12@mail.com" },
+                new Gestores { GestorID = 13, Nome = "Gestor13", Email = "gestor13@mail.com" }
                 );
 
             modelBuilder.Entity<Serviços>().HasData(
@@ -78,8 +88,185 @@ namespace psi_2022_oficinas.Data
                 new Serviços { IdServ = 13, Servico = "Assistência em Viagem" },
                 new Serviços { IdServ = 14, Servico = "GPL Auto" }
             );
-        }
 
+
+            modelBuilder.Entity<Oficinas>().HasData(
+                new Oficinas
+                {
+                    IdOficina = 1,
+                    Nome = "Boxcar Vulco Lisboa",
+                    Morada = "Rua Fernão Mendes Pinto Lote M-T",
+                    CodigoPostal = "1400 - 145",
+                    Localidade = "Lisboa",
+                    NumTelemovel = "912 360 073",
+                    //Horario = "2ªfeira a Sábado: 08:30 - 19:00 Domingo: Fechado",
+                    Imagem = "id1_boxcarvulcolisboa.jpg",
+                    IdGestor = 1
+                },
+
+
+                new Oficinas
+                {
+                    IdOficina = 2,
+                    Nome = "Confiauto Braga",
+                    Morada = "Avenida Cidade do Porto n.º 182, Ferreiros",
+                    CodigoPostal = "4705 - 084",
+                    Localidade = "Braga",
+                    NumTelemovel = "252 248 500",
+                    //Horario = "2ªfeira a 6ªfeira: 08:30 - 18:00 Sábado: 09:00 - 13:00 Domingo: Fechado",
+                    Imagem = "id2_braga.jpg",
+                    IdGestor = 2
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 3,
+                    Nome = "Auto Arca D'Água 2",
+                    Morada = "Rua 1º de Maio n.º 614B, Alfena",
+                    CodigoPostal = "4445 - 245",
+                    Localidade = "Valongo, Porto",
+                    NumTelemovel = "229 689 811",
+                    //Horario = "2ªfeira a 6ªfeira : 08:30 - 18:00 Sábado : 09:00 - 13:00 Domingo : Fechado",
+                    Imagem = "id3_autoarcadgua2.jpg",
+                    IdGestor = 3
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 4,
+                    Nome = "Manuel Jorge Santos Pereira",
+                    Morada = "Rua Guilherme Gomes Fernandes n.º 1",
+                    CodigoPostal = "2900 - 395",
+                    Localidade = "Setúbal",
+                    NumTelemovel = "921321817",
+                    //Horario = "2ªfeira a 6ªfeira : 08:00 - 18:00 Sábado a Domingo : Fechado",
+                    Imagem = "id4.jpg",
+                    IdGestor = 4
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 5,
+                    Nome = "JSA",
+                    Morada = "Rua 27 de Julho n.º 27, Trafaria",
+                    CodigoPostal = "2825 - 895",
+                    Localidade = "Almada, Setúbal",
+                    NumTelemovel = "960 306 191",
+                    //Horario = "2ªfeira a Sábado : 08:30 - 17:30 Domingo : Fechado",
+                    Imagem = "id5_jsa.jpg",
+                    IdGestor = 5
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 6,
+                    Nome = "MEIRICARRO",
+                    Morada = "Rua das Covinhas, Santiago de Litém",
+                    CodigoPostal = "3105-238",
+                    Localidade = "Pombal, Leiria",
+                    NumTelemovel = "236 948 477",
+                    //Horario = "2ªfeira a 6ªfeira : 09:00 - 18:30 Sábado a Domingo : Fechado",
+                    Imagem = "id6_meiricarro.jpg",
+                    IdGestor = 6
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 7,
+                    Nome = "Automotorsport",
+                    Morada = "Travassós de Baixo, Estrada São João da Carreira",
+                    CodigoPostal = "3500-188",
+                    Localidade = "Viseu",
+                    NumTelemovel = "918 702 101",
+                    //Horario = "2ªfeira a 6ªfeira : 09:00 - 18:30 Sábado : 09:00 - 12:30 Domingo : Fechado",
+                    Imagem = "id7_automotor.jpg",
+                    IdGestor = 7
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 8,
+                    Nome = "Auto Carapelhos",
+                    Morada = "Rua da Floresta n.º 255, Carapelhos",
+                    CodigoPostal = "3070-604",
+                    Localidade = "Mira, Coimbra",
+                    NumTelemovel = "231 451 782",
+                    //Horario = "2ªfeira a 6ªfeira : 08:30 - 18:00 Sábado : 08:30 - 12:30 Domingo : Fechado",
+                    Imagem = "id8.jpg",
+                    IdGestor = 8
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 9,
+                    Nome = "Martinho Auto",
+                    Morada = "Rua Doutor Hilário Barreiro Nunes Lote 26B, Zona Industrial",
+                    CodigoPostal = "2005-002",
+                    Localidade = "Santarém",
+                    NumTelemovel = "243 302 228",
+                    //Horario = "2ªfeira a 6ªfeira : 08:30 - 19:00 Sábado a Domingo : Fechado",
+                    Imagem = "id9_martinho.jpg",
+                    IdGestor = 9
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 10,
+                    Nome = "Auto Nogueiras",
+                    Morada = "Zona Industrial Cabeço de Deus",
+                    CodigoPostal = "2460-477",
+                    Localidade = "Alcobaça, Leiria",
+                    NumTelemovel = "262 585 252",
+                    //Horario = "2ªfeira a 6ªfeira : 08:30 - 18:00 Sábado a Domingo : Fechado",
+                    Imagem = "id10.jpg",
+                    IdGestor = 10
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 11,
+                    Nome = "Corvauto",
+                    Morada = "Rua Duarte Ludgero, Esgueira",
+                    CodigoPostal = "3800-301",
+                    Localidade = "Aveiro",
+                    NumTelemovel = "234 303 150",
+                    //Horario = "2ªfeira a 6ªfeira : 08:30 - 17:30 Sábado a Domingo : Fechado",
+                    Imagem = "id11_corvauto.jpg",
+                    IdGestor = 11
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 12,
+                    Nome = "Auto Imperial",
+                    Morada = "Avenida das Cantarias n.º 130",
+                    CodigoPostal = "5300-107",
+                    //Distrito = "Bragança", 
+                    //Concelho = "Bragança", 
+                    Localidade = "Bragança",
+                    NumTelemovel = "273 302 600",
+                    // Horario = "2ªfeira a 6ªfeira : 08:30 - 18:00 Sábado a Domingo : Fechado",
+                    Imagem = "id12.jpg",
+                    IdGestor = 12
+                },
+
+                new Oficinas
+                {
+                    IdOficina = 13,
+                    Nome = "Rino - Auto Alexandre",
+                    Morada = "Cerro Cabeça de Câmara",
+                    CodigoPostal = "8100-289",
+                    Localidade = "Loulé, Faro",
+                    NumTelemovel = "289 410 660",
+                    //Horario = "2ªfeira a 6ªfeira : 08:30 - 18:00 Sábado : 08:30 - 13:00 Domingo : Fechado",
+                    Imagem = "id13_rinoauto.jpg",
+                    IdGestor = 13
+                }
+            );
+
+
+
+        }
         // Representar as Tabelas da BD
         public DbSet<Clientes> Clientes { get; set; }
         public DbSet<Oficinas> Oficinas { get; set; }
