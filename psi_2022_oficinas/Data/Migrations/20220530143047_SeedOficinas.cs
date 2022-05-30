@@ -5,7 +5,7 @@
 namespace psi_2022_oficinas.Data.Migrations
 {
     public partial class SeedOficinas : Migration
-    {
+    { 
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.UpdateData(
