@@ -1,11 +1,14 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Dados do Cliente";
+    ViewData["TitleCliente"] = "Dados do Cliente";
+    ViewData["TitleAdmin"] = "Dados";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h3>@ViewData["Title"]</h3>
+@if (User.IsInRole("Admin")) {<h3>@ViewData["TitleAdmin"]</h3>}
+@if (User.IsInRole("Cliente")) {<h3>@ViewData["TitleCliente"]</h3>}
+
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
     <div class="col-md-6">
