@@ -51,6 +51,7 @@ namespace psi_2022_oficinas
                 {
                     UserName = "admin@gmail.com",
                     Email = "admin@gmail.com",
+                    PhoneNumber = "12345",
                     EmailConfirmed = true
                 };
 

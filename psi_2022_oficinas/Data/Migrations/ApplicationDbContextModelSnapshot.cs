@@ -194,7 +194,7 @@ namespace psi_2022_oficinas.Data.Migrations
 
                     b.HasIndex("ListaServicosIdServ");
 
-                    b.ToTable("OficinasServiços");
+                    b.ToTable("OficinasServiços", (string)null);
 
                     b.HasData(
                         new
@@ -934,7 +934,7 @@ namespace psi_2022_oficinas.Data.Migrations
 
                     b.HasKey("IdClientes");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Clientes", (string)null);
                 });
 
             modelBuilder.Entity("psi_2022_oficinas.Models.Gestores", b =>
@@ -957,7 +957,7 @@ namespace psi_2022_oficinas.Data.Migrations
 
                     b.HasKey("GestorID");
 
-                    b.ToTable("Gestores");
+                    b.ToTable("Gestores", (string)null);
 
                     b.HasData(
                         new
@@ -1080,7 +1080,7 @@ namespace psi_2022_oficinas.Data.Migrations
 
                     b.HasIndex("IdPagamento");
 
-                    b.ToTable("Marcacoes");
+                    b.ToTable("Marcacoes", (string)null);
                 });
 
             modelBuilder.Entity("psi_2022_oficinas.Models.MetodoPagamento", b =>
@@ -1096,7 +1096,7 @@ namespace psi_2022_oficinas.Data.Migrations
 
                     b.HasKey("IdPagamento");
 
-                    b.ToTable("MetodoPagamento");
+                    b.ToTable("MetodoPagamento", (string)null);
 
                     b.HasData(
                         new
@@ -1159,7 +1159,7 @@ namespace psi_2022_oficinas.Data.Migrations
 
                     b.HasIndex("IdGestor");
 
-                    b.ToTable("Oficinas");
+                    b.ToTable("Oficinas", (string)null);
 
                     b.HasData(
                         new
@@ -1320,7 +1320,7 @@ namespace psi_2022_oficinas.Data.Migrations
 
                     b.HasKey("IdServ");
 
-                    b.ToTable("Serviços");
+                    b.ToTable("Serviços", (string)null);
 
                     b.HasData(
                         new
