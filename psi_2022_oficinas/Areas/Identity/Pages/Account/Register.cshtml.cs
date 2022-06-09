@@ -128,12 +128,13 @@ namespace psi_2022_oficinas.Areas.Identity.Pages.Account {
 
          // validar se se pode criar um USER
          // Se os dados forem validados pela classe 'InputModel'
-         if (!ModelState.IsValid) {
+         if (ModelState.IsValid) {
 
             // criar um objeto do tipo 'ApplicationUser'
             var user = new ApplicationUser {
                UserName = Input.Email, // username
-               Email = Input.Email,    // email do utilizador
+               Email = Input.Email,
+               PhoneNumber = Input.Cliente.Ntelemovel,// email do utilizador
                EmailConfirmed = true, // o email não está formalmente confirmado
                LockoutEnabled = true,  // o utilizador pode ser bloqueado
                LockoutEnd = new DateTime(DateTime.Now.Day, 1, 1),  // data em que termina o bloqueio,

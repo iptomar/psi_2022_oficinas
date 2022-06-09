@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-   ViewData["Title"] = "Registar";
+    ViewData["Title"] = "Registar";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -9,84 +9,84 @@
 
 <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
+    @* este objeto é para preencher o email com um valor 'fake' para o ModelState não dar erro *@
+    <input asp-for="Input.Cliente.Email" value="a@a.aa" type="hidden" />
 
+    <div class="row">
+        @*<form asp-route-returnUrl="@Model.ReturnUrl" method="post">*@
+        <div class="col-md-4">
 
-   <div class="row">
-      @*<form asp-route-returnUrl="@Model.ReturnUrl" method="post">*@
-      <div class="col-md-4">
+            <h4>Criar uma nova conta.</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-         <h4>Criar uma nova conta.</h4>
-         <hr />
-         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Registar</button>
 
-         <div class="form-group">
-            <label asp-for="Input.Email"></label>
-            <input asp-for="Input.Email" class="form-control" />
-            <span asp-validation-for="Input.Email" class="text-danger"></span>
-         </div>
-         <div class="form-group">
-            <label asp-for="Input.Password"></label>
-            <input asp-for="Input.Password" class="form-control" />
-            <span asp-validation-for="Input.Password" class="text-danger"></span>
-         </div>
-         <div class="form-group">
-            <label asp-for="Input.ConfirmPassword"></label>
-            <input asp-for="Input.ConfirmPassword" class="form-control" />
-            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-         </div>
-         <button type="submit" class="btn btn-primary">Registar</button>
-
-      </div>
-      <div class="col-md-6 col-md-offset-2">
-          @* Pedir ao novo utilizador que preencha os dados do Cliente*@
-          <p><b>Dados do Cliente</b></p>
-          <hr />
-          <div class="form-group">
-              <label asp-for="Input.Cliente.PrimeiroNome" class="control-label"></label>
-              <input asp-for="Input.Cliente.PrimeiroNome" class="form-control" />
-              <span asp-validation-for="Input.Cliente.PrimeiroNome" class="text-danger"></span>
-          </div>
-          <div class="form-group">
-              <label asp-for="Input.Cliente.Apelido" class="control-label"></label>
-              <input asp-for="Input.Cliente.Apelido" class="form-control" />
-              <span asp-validation-for="Input.Cliente.Apelido" class="text-danger"></span>
-          </div>
-          <div class="form-group">
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            @* Pedir ao novo utilizador que preencha os dados do Cliente*@
+            <p><b>Dados do Cliente</b></p>
+            <hr />
+            <div class="form-group">
+                <label asp-for="Input.Cliente.PrimeiroNome" class="control-label"></label>
+                <input asp-for="Input.Cliente.PrimeiroNome" class="form-control" />
+                <span asp-validation-for="Input.Cliente.PrimeiroNome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Cliente.Apelido" class="control-label"></label>
+                <input asp-for="Input.Cliente.Apelido" class="form-control" />
+                <span asp-validation-for="Input.Cliente.Apelido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Input.Cliente.DataNasc" class="control-label"></label>
                 <input asp-for="Input.Cliente.DataNasc" class="form-control" />
                 <span asp-validation-for="Input.Cliente.DataNasc" class="text-danger"></span>
-          </div>
-          <div class="form-group">
-              <label asp-for="Input.Cliente.Morada" class="control-label"></label>
-              <input asp-for="Input.Cliente.Morada" class="form-control" />
-              <span asp-validation-for="Input.Cliente.Morada" class="text-danger"></span>
-          </div>
-          <div class="form-group">
-              <label asp-for="Input.Cliente.CodPostal" class="control-label"></label>
-              <input asp-for="Input.Cliente.CodPostal" class="form-control" />
-              <span asp-validation-for="Input.Cliente.CodPostal" class="text-danger"></span>
-          </div>
-         <div class="form-group">
-              <label asp-for="Input.Cliente.NIF" class="control-label"></label>
-              <input asp-for="Input.Cliente.NIF" class="form-control" />
-              <span asp-validation-for="Input.Cliente.NIF" class="text-danger"></span>
-          </div>
-          <div class="form-group">
-              <label asp-for="Input.Cliente.Ntelemovel" class="control-label"></label>
-              <input asp-for="Input.Cliente.Ntelemovel" class="form-control" />
-              <span asp-validation-for="Input.Cliente.Ntelemovel" class="text-danger"></span>
-          </div>
-          <div class="form-group">
-              <label asp-for="Input.Cliente.NCartaConducao" class="control-label"></label>
-              <input asp-for="Input.Cliente.NCartaConducao" class="form-control" />
-              <span asp-validation-for="Input.Cliente.NCartaConducao" class="text-danger"></span>
-          </div>
-
-      </div>
-   </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Cliente.Morada" class="control-label"></label>
+                <input asp-for="Input.Cliente.Morada" class="form-control" />
+                <span asp-validation-for="Input.Cliente.Morada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Cliente.CodPostal" class="control-label"></label>
+                <input asp-for="Input.Cliente.CodPostal" class="form-control" />
+                <span asp-validation-for="Input.Cliente.CodPostal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Cliente.NIF" class="control-label"></label>
+                <input asp-for="Input.Cliente.NIF" class="form-control" />
+                <span asp-validation-for="Input.Cliente.NIF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Cliente.Ntelemovel" class="control-label"></label>
+                <input asp-for="Input.Cliente.Ntelemovel" class="form-control" />
+                <span asp-validation-for="Input.Cliente.Ntelemovel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Cliente.NCartaConducao" class="control-label"></label>
+                <input asp-for="Input.Cliente.NCartaConducao" class="form-control" />
+                <span asp-validation-for="Input.Cliente.NCartaConducao" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
 </form>
 
 
 @section Scripts {
-   <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }
