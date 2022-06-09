@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using psi_2022_oficinas.Data;
 
@@ -18,15 +19,21 @@ namespace psi_2022_oficinas.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        /// <summary>
+        /// este atributo representa a base de dados do projeto
+        /// </summary>
+        private readonly ApplicationDbContext _context;
 
         public DeletePersonalDataModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         /// <summary>
@@ -82,10 +89,19 @@ namespace psi_2022_oficinas.Areas.Identity.Pages.Account.Manage
             {
                 if (!await _userManager.CheckPasswordAsync(user, Input.Password))
                 {
-                    ModelState.AddModelError(string.Empty, "Incorrect password.");
+                    ModelState.AddModelError(string.Empty, "Password incorreta.");
                     return Page();
                 }
             }
+
+            var cliente = await _context.Clientes.Where(c => c.UserName == _userManager.GetUserId(User)).FirstOrDefaultAsync();
+
+            if (cliente != null)
+            {
+                _context.Clientes.Remove(cliente);
+            }
+
+            await _context.SaveChangesAsync();
 
             var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
