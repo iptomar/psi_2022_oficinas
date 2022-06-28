@@ -29,10 +29,10 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Pagamento)
-            </th>
+            </th>@*
             <th>
                 @Html.DisplayNameFor(model => model.Cliente)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Oficina)
             </th>
@@ -58,13 +58,13 @@
                 @Html.DisplayFor(modelItem => item.Caucao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Pagamento.IdPagamento)
-            </td>
+                @Html.DisplayFor(modelItem => item.Pagamento.TipoPagamento)
+            </td>@*
             <td>
                 @Html.DisplayFor(modelItem => item.Cliente.Apelido)
-            </td>
+            </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.Oficina.CodigoPostal)
+                @Html.DisplayFor(modelItem => item.Oficina.Nome)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdMarcacao">Edit</a> |

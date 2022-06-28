@@ -22,7 +22,7 @@ namespace psi_2022_oficinas.Models
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Data de Nascimento")]
+        [Display(Name = "Data de Marcação")]
         public DateTime DataPedido { get; set; }
 
         /// <summary>

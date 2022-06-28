@@ -410,7 +410,26 @@ namespace psi_2022_oficinas.Data
 
 
 
+
+            //// sedd tabela Marcacoes
+            //modelBuilder.Entity<Marcacoes>().HasData(
+            //    new Marcacoes
+            //    {
+            //        IdMarcacao = 1,
+            //        DataPedido = DateTime.Now,
+            //        ClassServico = "1",
+            //        EstadoServico = "1",
+            //        Descricao = "1",
+            //        Caucao = "1",
+            //        IdPagamento = 1,
+            //        IdCliente = 1,
+            //        IdOficina = 1
+            //    }
+
+            //    );
         }
+
+
         // Representar as Tabelas da BD
         public DbSet<Clientes> Clientes { get; set; }
         public DbSet<Oficinas> Oficinas { get; set; }
