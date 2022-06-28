@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,17 +15,32 @@ namespace psi_2022_oficinas.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public MarcacoesController(ApplicationDbContext context)
+        /// <summary>
+        /// esta variável recolhe os dados da pessoa q se autenticou
+        /// </summary>
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public MarcacoesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Marcacoes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Marcacoes.Include(m => m.Cliente).Include(m => m.Oficina).Include(m => m.Pagamento);
-            return View(await applicationDbContext.ToListAsync());
+            string idDaPessoaAutenticada = _userManager.GetUserId(User);
+
+            var marcacoes = await (from v in _context.Marcacoes.Include(v => v.Cliente).Include(v => v.Pagamento).Include(v => v.Oficina)
+                                   join c in _context.Clientes on v.IdCliente equals c.IdClientes
+                                   join u in _context.Users on c.Email equals u.Email
+                                   where u.Id == idDaPessoaAutenticada
+                                   select v)
+                                  .ToListAsync();
+
+            return View(marcacoes);
         }
+
 
         // GET: Marcacoes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -50,9 +66,9 @@ namespace psi_2022_oficinas.Controllers
         // GET: Marcacoes/Create
         public IActionResult Create()
         {
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdClientes", "Apelido");
-            ViewData["IdOficina"] = new SelectList(_context.Oficinas, "IdOficina", "CodigoPostal");
-            ViewData["IdPagamento"] = new SelectList(_context.MetodoPagamento, "IdPagamento", "IdPagamento");
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdClientes", "IdClientes");
+            ViewData["IdOficina"] = new SelectList(_context.Oficinas, "IdOficina", "Nome");
+            ViewData["IdPagamento"] = new SelectList(_context.MetodoPagamento, "IdPagamento", "TipoPagamento");
             return View();
         }
 
@@ -61,17 +77,21 @@ namespace psi_2022_oficinas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdMarcacao,DataPedido,ClassServico,EstadoServico,Descricao,Caucao,IdPagamento,IdCliente,IdOficina")] Marcacoes marcacoes)
+        public async Task<IActionResult> Create([Bind("IdMarcacao,DataPedido,ClassServico,EstadoServico,Descricao,Caucao,IdPagamento,IdOficina")] Marcacoes marcacoes)
         {
             if (ModelState.IsValid)
             {
+                // obter os dados da pessoa autenticada
+                Clientes cliente = _context.Clientes.Where(c => c.UserName == _userManager.GetUserId(User)).FirstOrDefault();
+                // adicionar o cliente ao veículo
+                marcacoes.Cliente = cliente;
+
                 _context.Add(marcacoes);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdClientes", "Apelido", marcacoes.IdCliente);
-            ViewData["IdOficina"] = new SelectList(_context.Oficinas, "IdOficina", "CodigoPostal", marcacoes.IdOficina);
-            ViewData["IdPagamento"] = new SelectList(_context.MetodoPagamento, "IdPagamento", "IdPagamento", marcacoes.IdPagamento);
+            ViewData["IdOficina"] = new SelectList(_context.Oficinas, "IdOficina", "CodigoPostal", marcacoes.Oficina);
+            ViewData["IdPagamento"] = new SelectList(_context.MetodoPagamento, "IdPagamento", "IdPagamento", marcacoes.Pagamento);
             return View(marcacoes);
         }
 
@@ -88,9 +108,8 @@ namespace psi_2022_oficinas.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdClientes", "Apelido", marcacoes.IdCliente);
-            ViewData["IdOficina"] = new SelectList(_context.Oficinas, "IdOficina", "CodigoPostal", marcacoes.IdOficina);
-            ViewData["IdPagamento"] = new SelectList(_context.MetodoPagamento, "IdPagamento", "IdPagamento", marcacoes.IdPagamento);
+            ViewData["IdOficina"] = new SelectList(_context.Oficinas, "IdOficina", "CodigoPostal", marcacoes.Oficina);
+            ViewData["IdPagamento"] = new SelectList(_context.MetodoPagamento, "IdPagamento", "IdPagamento", marcacoes.Pagamento);
             return View(marcacoes);
         }
 
@@ -126,9 +145,8 @@ namespace psi_2022_oficinas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdClientes", "Apelido", marcacoes.IdCliente);
-            ViewData["IdOficina"] = new SelectList(_context.Oficinas, "IdOficina", "CodigoPostal", marcacoes.IdOficina);
-            ViewData["IdPagamento"] = new SelectList(_context.MetodoPagamento, "IdPagamento", "IdPagamento", marcacoes.IdPagamento);
+            ViewData["IdOficina"] = new SelectList(_context.Oficinas, "IdOficina", "CodigoPostal", marcacoes.Oficina);
+            ViewData["IdPagamento"] = new SelectList(_context.MetodoPagamento, "IdPagamento", "IdPagamento", marcacoes.Pagamento);
             return View(marcacoes);
         }
 

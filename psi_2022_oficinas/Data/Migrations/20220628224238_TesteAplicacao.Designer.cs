@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using psi_2022_oficinas.Data;
 
@@ -11,9 +12,10 @@ using psi_2022_oficinas.Data;
 namespace psi_2022_oficinas.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220628224238_TesteAplicacao")]
+    partial class TesteAplicacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,21 +54,21 @@ namespace psi_2022_oficinas.Data.Migrations
                         new
                         {
                             Id = "C",
-                            ConcurrencyStamp = "de59a06d-3bb6-4182-bd03-2175188f2570",
+                            ConcurrencyStamp = "0de27f31-4c40-49f0-a7ed-db2c39c99ef5",
                             Name = "Cliente",
                             NormalizedName = "CLIENTE"
                         },
                         new
                         {
                             Id = "A",
-                            ConcurrencyStamp = "17c6ad72-33ad-4369-b062-a7f5d7b13ab9",
+                            ConcurrencyStamp = "8d8c467b-434c-40d1-8bf2-2706098ab53d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "G",
-                            ConcurrencyStamp = "beeed477-b369-4842-8201-5c9fe28055be",
+                            ConcurrencyStamp = "afefa3f7-821c-4338-bf72-0fbc5cb904ca",
                             Name = "Gestor",
                             NormalizedName = "GESTOR"
                         });
@@ -1081,6 +1083,20 @@ namespace psi_2022_oficinas.Data.Migrations
                     b.HasIndex("IdPagamento");
 
                     b.ToTable("Marcacoes");
+
+                    b.HasData(
+                        new
+                        {
+                            IdMarcacao = 1,
+                            Caucao = "1",
+                            ClassServico = "1",
+                            DataPedido = new DateTime(2022, 6, 28, 23, 42, 38, 493, DateTimeKind.Local).AddTicks(216),
+                            Descricao = "1",
+                            EstadoServico = "1",
+                            IdCliente = 1,
+                            IdOficina = 1,
+                            IdPagamento = 1
+                        });
                 });
 
             modelBuilder.Entity("psi_2022_oficinas.Models.MetodoPagamento", b =>
