@@ -28,21 +28,25 @@ namespace psi_2022_oficinas.Models
         /// <summary>
         /// Classe do Serviço
         /// </summary>
+        [Display(Name = "Serviço")]
         public String ClassServico { get; set; }
 
         /// <summary>
         /// Estado do Serviço
         /// </summary>
+        [Display(Name = "Estado do Serviço")]
         public String EstadoServico { get; set; }
 
         /// <summary>
         /// Descrição
         /// </summary>
+        [Display(Name = "Descrição")]
         public String Descricao { get; set; }
 
         /// <summary>
         /// Caução
         /// </summary>
+        [Display(Name = "Caução")]
         public String Caucao { get; set; }
 
         //################################ FOREIGN KEY #####################################
@@ -50,6 +54,7 @@ namespace psi_2022_oficinas.Models
         /// <summary>
         /// Método de Pagamento
         /// </summary>
+        [Display(Name = "Método de Pagamento")]
         [ForeignKey(nameof(Pagamento))] 
         public int IdPagamento { get; set; }
         public MetodoPagamento Pagamento { get; set; }
@@ -64,6 +69,7 @@ namespace psi_2022_oficinas.Models
         /// <summary>
         /// Oficina na qual o cliente pretende a marcação
         /// </summary>
+        [Display(Name = "Oficina a desempenhar o serviço")]
         [ForeignKey(nameof(Oficina))]
         public int IdOficina { get; set; }
         public Oficinas Oficina { get; set; }
