@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,7 @@ using psi_2022_oficinas.Models;
 
 namespace psi_2022_oficinas.Controllers
 {
+    [Authorize] // esta 'anotação' garante que só as pessoas autenticadas têm acesso aos recursos
     public class MarcacoesController : Controller
     {
         private readonly ApplicationDbContext _context;
